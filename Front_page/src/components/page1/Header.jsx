@@ -1,32 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 
 const Header = () => {
     const [resourcesOpen, setResourcesOpen] = useState(false);
     const [solutionsOpen, setSolutionsOpen] = useState(false);
+    const [headerBackground, setHeaderBackground] = useState("bg-transparent");
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setHeaderBackground("bg-gray-300");
+            } else {
+                setHeaderBackground("bg-transparent");
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     return (
-        <header className="absolute top-5 left-5 z-10 w-full">
-            <div className="flex items-center justify-between w-full px-5">
+        <header className={`sticky top-0 left-0 z-30 w-full ${headerBackground}`}>
+            <div className="container mx-auto flex items-center justify-between px-5 py-3">
                 <div className="flex items-center space-x-3">
                     <img src="/logo222.png" alt="Logo" className="h-20" />
                     <h1 className="text-xl font-bold text-white">SUSTAINATRIX</h1>
                 </div>
-                <nav className="mr-7">
+                <nav>
                     <ul className="flex items-center space-x-8">
-                        <li
-                            className="relative group py-4"
-                            onMouseEnter={() => setSolutionsOpen(true)}
-                            onMouseLeave={() => setSolutionsOpen(false)}
-                        >
-                            <button className="text-white transform transition-transform duration-300 hover:scale-105 focus:outline-none">
+                        <li className="relative">
+                            <button
+                                className="text-white text-lg leading-none py-4 hover:text-gray-300"
+                                onMouseEnter={() => setSolutionsOpen(true)}
+                                onMouseLeave={() => setSolutionsOpen(false)}>
                                 SOLUTIONS
                             </button>
                             {solutionsOpen && (
-                                <div
-                                    className="absolute mt-2 w-56 bg-gray-800 shadow-lg rounded-lg bg-opacity-20"
+                                <div className="absolute top-full left-0 mt-1 w-56 bg-gray-800 shadow-lg rounded-lg bg-opacity-90"
                                     onMouseEnter={() => setSolutionsOpen(true)}
-                                    onMouseLeave={() => setSolutionsOpen(false)}
-                                >
+                                    onMouseLeave={() => setSolutionsOpen(false)}>
                                     <ul className="py-2 text-white">
                                         <li className="px-4 py-2 hover:bg-gray-700">
                                             <a href="/solution1">ESG & Sustainability Reporting & Management</a>
@@ -47,20 +61,17 @@ const Header = () => {
                                 </div>
                             )}
                         </li>
-                        <li
-                            className="relative group py-4"
-                            onMouseEnter={() => setResourcesOpen(true)}
-                            onMouseLeave={() => setResourcesOpen(false)}
-                        >
-                            <button className="text-white transform transition-transform duration-300 hover:scale-105 focus:outline-none">
+                        <li className="relative">
+                            <button
+                                className="text-white text-lg leading-none py-4 hover:text-gray-300"
+                                onMouseEnter={() => setResourcesOpen(true)}
+                                onMouseLeave={() => setResourcesOpen(false)}>
                                 RESOURCES
                             </button>
                             {resourcesOpen && (
-                                <div
-                                    className="absolute mt-2 w-56 bg-gray-800 shadow-lg rounded-lg bg-opacity-20"
+                                <div className="absolute top-full left-0 mt-1 w-56 bg-gray-800 shadow-lg rounded-lg bg-opacity-90"
                                     onMouseEnter={() => setResourcesOpen(true)}
-                                    onMouseLeave={() => setResourcesOpen(false)}
-                                >
+                                    onMouseLeave={() => setResourcesOpen(false)}>
                                     <ul className="py-2 text-white">
                                         <li className="px-4 py-2 hover:bg-gray-700">
                                             <a href="/resource1">Manufacturing</a>
@@ -87,9 +98,9 @@ const Header = () => {
                                 </div>
                             )}
                         </li>
-                        <li><a href="#" className="text-white py-4 transform transition-transform duration-300 hover:scale-105 focus:outline-none">ABOUT US</a></li>
-                        <li><a href="#" className="text-white py-4 transform transition-transform duration-300 hover:scale-105 focus:outline-none">CONTACT US</a></li>
-                        <li><a href="#" className="text-white py-4 transform transition-transform duration-300 hover:scale-105 focus:outline-none">SIGN IN</a></li>
+                        <li><a href="#" className="text-white text-lg leading-none py-4 hover:text-gray-300">ABOUT US</a></li>
+                        <li><a href="#" className="text-white text-lg leading-none py-4 hover:text-gray-300">CONTACT US</a></li>
+                        <li><a href="#" className="text-white text-lg leading-none py-4 hover:text-gray-300">SIGN IN</a></li>
                     </ul>
                 </nav>
             </div>

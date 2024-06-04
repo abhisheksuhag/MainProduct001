@@ -21,7 +21,7 @@ const Features = () => {
     ];
 
     return (
-        <div className=" fade-in relative w-full h-[70vh] bg-cover" style={{ backgroundImage: 'url(/m4.jpg)', backgroundPosition: 'top center' }}>
+        <div className=" fade-in relative w-full h-[70vh] bg-cover" style={{ backgroundImage: 'url(/m4.jpg)', backgroundPosition: ' center' }}>
             <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center">
                 <div className="text-center text-white mb-10 fade-in">
                     <h1 className="text-4xl font-bold text-shadow">Our Commitment</h1>

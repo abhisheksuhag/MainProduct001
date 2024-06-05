@@ -9,23 +9,27 @@ const logos = [
     '/logo6.png'
 ];
 
+const logoWidth = 100; // width of one logo image in pixels
+
 const LogoList = () => {
     const scrollRef = useRef(null);
 
     useEffect(() => {
         const scroll = () => {
             if (scrollRef.current) {
-                if (scrollRef.current.scrollLeft >= scrollRef.current.scrollWidth / 2) {
+                scrollRef.current.scrollLeft += logoWidth;
+                if (scrollRef.current.scrollLeft >= scrollRef.current.scrollWidth) {
                     scrollRef.current.scrollLeft = 0;
-                } else {
-                    scrollRef.current.scrollLeft += 1;
                 }
             }
+            requestAnimationFrame(scroll);
         };
 
-        const intervalId = setInterval(scroll, 30);
+        scroll();
 
-        return () => clearInterval(intervalId);
+        return () => {
+            cancelAnimationFrame(scroll);
+        };
     }, []);
 
     return (
